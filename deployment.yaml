@@ -1,34 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-app-deployment
+  name: mario-deployment
 spec:
-  replicas: 3  # Adjust the number of replicas as needed
+  replicas: 2  # You can adjust the number of replicas as needed
   selector:
     matchLabels:
-      app: react-app
+      app: mario
   template:
     metadata:
       labels:
-        app: react-app
+        app: mario
     spec:
       containers:
-        - name: react-app-container
-          image: sevenajay/2048:latest  # Use your actual Docker image name and tag
-          ports:
-            - containerPort: 3000  # The port your React app is listening on
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: react-app-service
-spec:
-  selector:
-    app: react-app
-  ports:
-    - protocol: TCP
-      port: 80  # The port exposed by the service within the cluster
-      targetPort: 3000  # The port your React app is listening on inside the pod
-  type: LoadBalancer
-
+      - name: mario-container
+        image: sevenajay/mario:latest 
+        ports:
+        - containerPort: 80
